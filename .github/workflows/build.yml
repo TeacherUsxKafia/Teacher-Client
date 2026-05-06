@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        submodules: recursive
+        # We turned off recursive submodules to stop the Discord error
         fetch-depth: 0
 
     - name: Add MSBuild to PATH
