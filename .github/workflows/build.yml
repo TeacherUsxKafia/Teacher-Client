@@ -13,7 +13,8 @@ jobs:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0
-        submodules: false # We handle includes manually via CMake now
+        # CRITICAL: This downloads the uriparser and wil code needed for the build
+        submodules: recursive 
 
     - name: Configure CMake
       run: cmake -S . -B build -A x64 -DURIPARSER_BUILD_DOCS=OFF -DURIPARSER_BUILD_TESTS=OFF -DURIPARSER_BUILD_TOOLS=OFF
@@ -25,4 +26,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: Teacher-Client-EXE
-        path: build/Release/
+        path: build/src/Release/

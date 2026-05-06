@@ -14,16 +14,22 @@ else()
   set(CLIENT_VERSION_STRING CLIENT_VERSION_STRING_MIN)
 endif()
 
+# Core Folders - Cleaned of Discord references
 set(RAPIDJSON ${PROJECT_SOURCE_DIR}/rapidjson)
 set(SEMVER ${PROJECT_SOURCE_DIR}/semver)
 set(JSON ${PROJECT_SOURCE_DIR}/json)
 set(WEBVIEW2 ${PROJECT_SOURCE_DIR}/packages/Microsoft.Web.WebView2.1.0.1343.22)
 set(WIL ${PROJECT_SOURCE_DIR}/wil)
-set(DISCORD_RPC ${PROJECT_SOURCE_DIR}/discord-rpc)
 set(URIPARSER ${PROJECT_SOURCE_DIR}/uriparser)
 
 add_definitions(-DUNICODE -DNOMINMAX)
 
+# Force uriparser to be quiet and not build extra bloat
+set(URIPARSER_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+set(URIPARSER_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(URIPARSER_BUILD_TOOLS OFF CACHE BOOL "" FORCE)
+
 add_subdirectory (uriparser-lib)
-add_subdirectory (discord-rpc-lib)
+
+# Discord subdirectory removed to prevent build errors
 add_subdirectory (src)
