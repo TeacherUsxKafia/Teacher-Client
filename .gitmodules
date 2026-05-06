@@ -1,15 +1,12 @@
 [submodule "rapidjson"]
-	path = rapidjson
-	url = https://github.com/Tencent/rapidjson
+    path = rapidjson
+    url = https://github.com/Tencent/rapidjson
 [submodule "semver"]
-	path = semver
-	url = https://github.com/Neargye/semver.git
-[submodule "discord-rpc"]
-	path = discord-rpc
-	url = https://github.com/discord/discord-rpc.git
+    path = semver
+    url = https://github.com/Neargye/semver.git
 [submodule "uriparser"]
-	path = uriparser
-	url = https://github.com/uriparser/uriparser.git
+    path = uriparser
+    url = https://github.com/uriparser/uriparser.git
 [submodule "wil"]
-	path = wil
-	url = https://github.com/microsoft/wil
+    path = wil
+    url = https://github.com/microsoft/wil

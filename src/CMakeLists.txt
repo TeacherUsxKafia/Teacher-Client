@@ -1,8 +1,10 @@
-
 file(GLOB src
     "*.cpp"
     "../utils/*.cpp"
 )
+
+# We removed AccountManager.cpp and LobbySeeker.cpp from the folder, 
+# so file(GLOB) will now ignore them automatically.
 
 add_definitions(
     -DCLIENT_VERSION_STRING="${CLIENT_VERSION_STRING}"
@@ -15,9 +17,10 @@ add_definitions(
 
 add_executable(Client WIN32 ${src})
 target_sources(Client PRIVATE Resource.rc)
+
+# REMOVED: ${DISCORD_RPC}/include
 target_include_directories(Client PRIVATE
     ${PROJECT_SOURCE_DIR}/include
-    ${DISCORD_RPC}/include
     ${RAPIDJSON}/include
     ${URIPARSER}/include
     ${SEMVER}/include
@@ -31,6 +34,13 @@ elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
     SET(WEBVIEW2_ARCH "x86")
 endif()
 
-target_link_libraries(Client crypt32 winhttp discord-rpc uriparser ${WEBVIEW2}/build/native/${WEBVIEW2_ARCH}/WebView2LoaderStatic.lib)
+# REMOVED: discord-rpc from target_link_libraries
+target_link_libraries(Client 
+    crypt32 
+    winhttp 
+    uriparser 
+    ${WEBVIEW2}/build/native/${WEBVIEW2_ARCH}/WebView2LoaderStatic.lib
+)
+
 target_compile_features(Client PUBLIC cxx_std_20)
 set_target_properties(Client PROPERTIES CXX_EXTENSIONS OFF)
