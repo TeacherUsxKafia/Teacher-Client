@@ -3,8 +3,8 @@ file(GLOB src
     "../utils/*.cpp"
 )
 
-# We removed AccountManager.cpp and LobbySeeker.cpp from the folder, 
-# so file(GLOB) will now ignore them automatically.
+# Automated cleanup: Since we deleted AccountManager and LobbySeeker files,
+# file(GLOB) will no longer try to compile them.
 
 add_definitions(
     -DCLIENT_VERSION_STRING="${CLIENT_VERSION_STRING}"
@@ -18,7 +18,7 @@ add_definitions(
 add_executable(Client WIN32 ${src})
 target_sources(Client PRIVATE Resource.rc)
 
-# REMOVED: ${DISCORD_RPC}/include
+# Essential includes only - Removed Discord to boost performance
 target_include_directories(Client PRIVATE
     ${PROJECT_SOURCE_DIR}/include
     ${RAPIDJSON}/include
@@ -34,7 +34,7 @@ elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
     SET(WEBVIEW2_ARCH "x86")
 endif()
 
-# REMOVED: discord-rpc from target_link_libraries
+# Linking only what is needed for the core engine and low latency
 target_link_libraries(Client 
     crypt32 
     winhttp 
